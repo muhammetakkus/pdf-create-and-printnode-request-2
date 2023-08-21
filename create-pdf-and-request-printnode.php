@@ -10,6 +10,8 @@ $html = $data['html'];
 $targetPrinter = $data['target_printer'];
 $api_key = $data['printnode_key'];
 $o = $data['o'] ?? 'P';
+
+// make PDF
 $pdf = toPDF($html, $o);
 
 // PrintNode işlemleri
