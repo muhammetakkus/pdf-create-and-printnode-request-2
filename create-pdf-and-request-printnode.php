@@ -44,7 +44,8 @@ function toPDF($html, $o = 'P') {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://pro.tedisyon.com/pdf/index.php',
+        CURLOPT_URL => 'https://pro.tedisyon.com/pdf-and-printnode/index.php',
+        //CURLOPT_URL => 'https://www.tedisyon.com/pdf/index.php?o='.$o,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
