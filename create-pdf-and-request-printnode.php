@@ -10,9 +10,12 @@ $html = $data['html'];
 $targetPrinter = $data['target_printer'];
 $api_key = $data['printnode_key'];
 $o = $data['o'] ?? 'P';
-
+$w = $data['w'];
+$h = $data['h'];
+//$w = 50;
+//$h = 30;
 // make PDF
-$pdf = toPDF($html, $o);
+$pdf = toPDF($html, $o, $w, $h);
 
 // PrintNode işlemleri
 use PrintNode\Credentials\ApiKey;
@@ -26,7 +29,7 @@ $printJob = new PrintJob($client);
 $printJob->content = base64_encode($pdf);
 $printJob->source = rand() . ' - ' . date('Y-m-d H:i:s');
 $printJob->title = rand() . ' - ' . date('Y-m-d H:i:s');
-$printJob->options = ['paper' => 'USER', 'copies' => 1];
+$printJob->options = [/*'paper' => 'USER', */'copies' => 1];
 $printJob->printer = $targetPrinter;
 $printJob->contentType = 'pdf_base64';
 $printJobId = $client->createPrintJob($printJob);
@@ -35,10 +38,12 @@ $printJobId = $client->createPrintJob($printJob);
 return true;
 
 // Create PDF - MPDF index.php'de oradaki kodu buraya alıp CURL ile istek atmadan çalıştırınca olmuyor!?
-function toPDF($html, $o = 'P') {
+function toPDF($html, $o = 'P', $w, $h) {
      $data = [
         "html" => base64_encode($html),
-        "o" => $o
+        "o" => $o,
+	"w" => $w,
+	"h" => $h
     ];
 
     $curl = curl_init();
